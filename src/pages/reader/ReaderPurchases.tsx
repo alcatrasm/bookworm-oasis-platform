@@ -7,7 +7,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Search, Download, BookOpen, Clock, Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
-// Mock data for purchased books
+// Mock data for purchased books with proper typing
 const mockPurchases = [
   {
     id: "1",
@@ -16,7 +16,7 @@ const mockPurchases = [
     cover: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
     date: "15 Nisan 2023",
     price: "89.99",
-    status: "completed",
+    status: "completed" as const,
   },
   {
     id: "2",
@@ -25,7 +25,7 @@ const mockPurchases = [
     cover: "https://images.unsplash.com/photo-1535378917042-10a22c95931a",
     date: "23 Mayıs 2023",
     price: "129.99",
-    status: "completed",
+    status: "completed" as const,
   },
   {
     id: "3",
@@ -34,7 +34,7 @@ const mockPurchases = [
     cover: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e",
     date: "10 Haziran 2023",
     price: "79.99",
-    status: "processing",
+    status: "processing" as const,
   },
   {
     id: "4",
@@ -43,7 +43,7 @@ const mockPurchases = [
     cover: "https://images.unsplash.com/photo-1633613286991-611fe299c4be",
     date: "5 Temmuz 2023",
     price: "149.99",
-    status: "completed",
+    status: "completed" as const,
   },
   {
     id: "5",
@@ -52,7 +52,7 @@ const mockPurchases = [
     cover: "https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6",
     date: "18 Ağustos 2023",
     price: "99.99",
-    status: "processing",
+    status: "processing" as const,
   },
   {
     id: "6",
@@ -61,7 +61,7 @@ const mockPurchases = [
     cover: "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6",
     date: "9 Eylül 2023",
     price: "119.99",
-    status: "completed",
+    status: "completed" as const,
   },
 ];
 
