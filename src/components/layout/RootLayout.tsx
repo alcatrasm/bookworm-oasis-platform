@@ -5,9 +5,11 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const RootLayout = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const isDark = localStorage.getItem("darkMode") === "true";
@@ -41,11 +43,11 @@ const RootLayout = () => {
       <Button 
         variant="outline" 
         size="icon" 
-        className="fixed bottom-6 right-6 h-10 w-10 rounded-full shadow-md" 
+        className={`fixed ${isMobile ? 'bottom-20 right-4 h-8 w-8' : 'bottom-6 right-6 h-10 w-10'} rounded-full shadow-md z-30`}
         onClick={toggleDarkMode}
       >
-        {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-        <span className="sr-only">Toggle dark mode</span>
+        {isDarkMode ? <Sun className={`${isMobile ? 'h-4 w-4' : 'h-5 w-5'}`} /> : <Moon className={`${isMobile ? 'h-4 w-4' : 'h-5 w-5'}`} />}
+        <span className="sr-only">Karanlık modu değiştir</span>
       </Button>
     </div>
   );

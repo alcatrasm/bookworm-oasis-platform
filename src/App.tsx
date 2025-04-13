@@ -20,6 +20,7 @@ import Register from "./pages/auth/Register";
 
 // Reader Pages
 import ReaderDashboard from "./pages/reader/ReaderDashboard";
+import ReaderPurchases from "./pages/reader/ReaderPurchases";
 import BookReader from "./pages/reader/BookReader";
 
 // Author Pages
@@ -32,6 +33,10 @@ import BookApproval from "./pages/admin/BookApproval";
 
 // Book Pages
 import BookDetail from "./pages/books/BookDetail";
+
+// User Pages
+import Profile from "./pages/user/Profile";
+import Settings from "./pages/user/Settings";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +53,8 @@ const App = () => (
             <Route path="/books/:id" element={<BookDetail />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/categories/:slug" element={<Categories />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
           </Route>
           
           {/* Auth Routes */}
@@ -60,6 +67,7 @@ const App = () => (
             element={<DashboardLayout role="reader" />}
           >
             <Route path="dashboard" element={<ReaderDashboard />} />
+            <Route path="purchases" element={<ReaderPurchases />} />
             <Route path="" element={<Navigate to="/reader/dashboard" replace />} />
           </Route>
           <Route path="/reader/book/:id" element={<BookReader />} />
