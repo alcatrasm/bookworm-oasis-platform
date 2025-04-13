@@ -1,10 +1,37 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+// Layouts
+import RootLayout from "./components/layout/RootLayout";
+import DashboardLayout from "./components/layout/DashboardLayout";
+
+// Main Pages
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Categories from "./pages/Categories";
+
+// Auth Pages
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+
+// Reader Pages
+import ReaderDashboard from "./pages/reader/ReaderDashboard";
+import BookReader from "./pages/reader/BookReader";
+
+// Author Pages
+import AuthorDashboard from "./pages/author/AuthorDashboard";
+import CreateBook from "./pages/author/CreateBook";
+
+// Admin Pages
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import BookApproval from "./pages/admin/BookApproval";
+
+// Book Pages
+import BookDetail from "./pages/books/BookDetail";
 
 const queryClient = new QueryClient();
 
@@ -15,8 +42,50 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          {/* Main Routes */}
+          <Route element={<RootLayout />}>
+            <Route path="/" element={<Index />} />
+            <Route path="/books/:id" element={<BookDetail />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/categories/:slug" element={<Categories />} />
+          </Route>
+          
+          {/* Auth Routes */}
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/register" element={<Register />} />
+          
+          {/* Reader Routes */}
+          <Route 
+            path="/reader" 
+            element={<DashboardLayout role="reader" />}
+          >
+            <Route path="dashboard" element={<ReaderDashboard />} />
+            <Route path="" element={<Navigate to="/reader/dashboard" replace />} />
+          </Route>
+          <Route path="/reader/book/:id" element={<BookReader />} />
+          <Route path="/reader/book/:id/chapter/:chapterId" element={<BookReader />} />
+          
+          {/* Author Routes */}
+          <Route 
+            path="/author" 
+            element={<DashboardLayout role="author" />}
+          >
+            <Route path="dashboard" element={<AuthorDashboard />} />
+            <Route path="create" element={<CreateBook />} />
+            <Route path="" element={<Navigate to="/author/dashboard" replace />} />
+          </Route>
+          
+          {/* Admin Routes */}
+          <Route 
+            path="/admin" 
+            element={<DashboardLayout role="admin" />}
+          >
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="books/:id" element={<BookApproval />} />
+            <Route path="" element={<Navigate to="/admin/dashboard" replace />} />
+          </Route>
+          
+          {/* Catch-all Route */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
