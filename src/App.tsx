@@ -22,10 +22,12 @@ import Register from "./pages/auth/Register";
 import ReaderDashboard from "./pages/reader/ReaderDashboard";
 import ReaderPurchases from "./pages/reader/ReaderPurchases";
 import BookReader from "./pages/reader/BookReader";
+import EbookReader from "./pages/reader/EbookReader";
 
 // Author Pages
 import AuthorDashboard from "./pages/author/AuthorDashboard";
 import CreateBook from "./pages/author/CreateBook";
+import EbookEditor from "./pages/author/EbookEditor";
 
 // Admin Pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -72,6 +74,8 @@ const App = () => (
           </Route>
           <Route path="/reader/book/:id" element={<BookReader />} />
           <Route path="/reader/book/:id/chapter/:chapterId" element={<BookReader />} />
+          <Route path="/reader/ebook/:id" element={<EbookReader />} />
+          <Route path="/reader/ebook/:id/chapter/:chapterId" element={<EbookReader />} />
           
           {/* Author Routes */}
           <Route 
@@ -82,6 +86,8 @@ const App = () => (
             <Route path="create" element={<CreateBook />} />
             <Route path="" element={<Navigate to="/author/dashboard" replace />} />
           </Route>
+          <Route path="/author/ebook/:id" element={<EbookEditor />} />
+          <Route path="/author/ebook/new" element={<EbookEditor />} />
           
           {/* Admin Routes */}
           <Route 
