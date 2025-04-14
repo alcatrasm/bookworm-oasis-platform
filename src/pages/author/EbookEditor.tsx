@@ -42,7 +42,6 @@ import {
 } from "lucide-react";
 import { Book as BookType, Chapter, ChapterTemplate } from "@/types/ebook";
 
-// Default template content
 const CHAPTER_TEMPLATES: ChapterTemplate[] = [
   {
     name: "Boş Bölüm",
@@ -66,7 +65,6 @@ const CHAPTER_TEMPLATES: ChapterTemplate[] = [
   },
 ];
 
-// Mock book data - in a real application, this would come from a database
 const mockBook: BookType = {
   id: "sample-book-1",
   title: "Dijital Çağda Pazarlama Stratejileri",
@@ -101,7 +99,6 @@ const mockBook: BookType = {
   published: false,
 };
 
-// Custom content CSS for TinyMCE
 const CONTENT_CSS = `
   body {
     font-family: 'Merriweather', serif;
@@ -269,7 +266,6 @@ const EbookEditor = () => {
   const [isSaving, setIsSaving] = useState(false);
   const editorRef = useRef<any>(null);
 
-  // Set the first chapter as active when the page is loaded
   useEffect(() => {
     if (book.chapters.length > 0 && !selectedChapterId) {
       const firstChapter = book.chapters[0];
@@ -278,12 +274,7 @@ const EbookEditor = () => {
     }
   }, [book, selectedChapterId]);
 
-  // Load book data from API/localStorage
   useEffect(() => {
-    // In a real application, you would fetch the book data from an API
-    // For now, we're using mock data
-    
-    // Check if we have book data in localStorage
     const savedBook = localStorage.getItem(`book-${bookId}`);
     if (savedBook) {
       try {
@@ -311,7 +302,6 @@ const EbookEditor = () => {
         updatedAt: new Date().toISOString()
       };
       
-      // Save to localStorage
       localStorage.setItem(`book-${bookId}`, JSON.stringify(updatedBook));
       
       return updatedBook;
@@ -321,7 +311,7 @@ const EbookEditor = () => {
   const selectChapter = (chapterId: string) => {
     const chapter = book.chapters.find(ch => ch.id === chapterId);
     if (chapter) {
-      setSelectedChapterId(chapterId);
+      setSelectedChapterId(chapter.id);
       setActiveChapter(chapter);
     }
   };
@@ -343,13 +333,11 @@ const EbookEditor = () => {
         updatedAt: new Date().toISOString()
       };
       
-      // Save to localStorage
       localStorage.setItem(`book-${bookId}`, JSON.stringify(updatedBook));
       
       return updatedBook;
     });
     
-    // Select the new chapter
     setSelectedChapterId(newChapter.id);
     setActiveChapter(newChapter);
     
@@ -370,7 +358,6 @@ const EbookEditor = () => {
         updatedAt: new Date().toISOString()
       };
       
-      // Save to localStorage
       localStorage.setItem(`book-${bookId}`, JSON.stringify(updatedBook));
       
       return updatedBook;
@@ -394,13 +381,11 @@ const EbookEditor = () => {
         updatedAt: new Date().toISOString()
       };
       
-      // Save to localStorage
       localStorage.setItem(`book-${bookId}`, JSON.stringify(updatedBook));
       
       return updatedBook;
     });
     
-    // If the deleted chapter was the active one, select the first chapter
     if (selectedChapterId === chapterId) {
       const remainingChapters = book.chapters.filter(ch => ch.id !== chapterId);
       if (remainingChapters.length > 0) {
@@ -429,7 +414,6 @@ const EbookEditor = () => {
       const [movedChapter] = updatedChapters.splice(currentIndex, 1);
       updatedChapters.splice(newIndex, 0, movedChapter);
       
-      // Update order
       const chaptersWithUpdatedOrder = updatedChapters.map((chapter, index) => ({
         ...chapter,
         order: index
@@ -441,7 +425,6 @@ const EbookEditor = () => {
         updatedAt: new Date().toISOString()
       };
       
-      // Save to localStorage
       localStorage.setItem(`book-${bookId}`, JSON.stringify(updatedBook));
       
       return updatedBook;
@@ -451,9 +434,7 @@ const EbookEditor = () => {
   const saveBook = () => {
     setIsSaving(true);
     
-    // In a real application, you would save the book to an API
     setTimeout(() => {
-      // Save to localStorage for demo purposes
       localStorage.setItem(`book-${bookId}`, JSON.stringify({
         ...book,
         updatedAt: new Date().toISOString()
@@ -482,7 +463,6 @@ const EbookEditor = () => {
         updatedAt: new Date().toISOString()
       };
       
-      // Save to localStorage
       localStorage.setItem(`book-${bookId}`, JSON.stringify(updatedBook));
       
       return updatedBook;
@@ -499,7 +479,6 @@ const EbookEditor = () => {
         updatedAt: new Date().toISOString()
       };
       
-      // Save to localStorage
       localStorage.setItem(`book-${bookId}`, JSON.stringify(updatedBook));
       
       return updatedBook;
@@ -523,7 +502,6 @@ const EbookEditor = () => {
   return (
     <div className={`min-h-screen ${isDarkMode ? 'dark' : ''}`}>
       <div className="container max-w-full p-0">
-        {/* Header Bar */}
         <div className="flex items-center justify-between p-4 border-b">
           <div className="flex items-center gap-4">
             <Button 
