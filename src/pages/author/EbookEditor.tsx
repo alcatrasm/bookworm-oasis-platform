@@ -38,7 +38,7 @@ import {
   MoveVertical,
   Presentation,
   Bookmark,
-  BookOpen, // Add this import
+  BookOpen,
 } from "lucide-react";
 import { Book as BookType, Chapter, ChapterTemplate } from "@/types/ebook";
 
