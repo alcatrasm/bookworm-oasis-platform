@@ -1,6 +1,7 @@
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import { Editor } from "@tinymce/tinymce-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -10,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
-import { ChevronLeft, ChevronRight, FilePlus, Image, Info, Plus, Save, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, FilePlus, Image, Info, Plus, Save, X, PenTool, FileText } from "lucide-react";
 import { toast } from "sonner";
 
 // Mock categories data
@@ -35,6 +36,92 @@ interface Chapter {
   isPreview: boolean;
 }
 
+const CONTENT_CSS = `
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  margin: 20px;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+  color: #0056b3;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+  color: #0056b3;
+}
+
+h3 {
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+  color: #0056b3;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+ul, ol {
+  margin-bottom: 1em;
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+}
+
+blockquote {
+  border-left: 5px solid #ccc;
+  padding: 10px;
+  margin: 1.5em 10px;
+  background-color: #f9f9f9;
+}
+
+pre {
+  background-color: #f4f4f4;
+  padding: 10px;
+  overflow: auto;
+  border: 1px solid #ddd;
+}
+
+code {
+  font-family: monospace, monospace;
+  font-size: 14px;
+  background-color: #f4f4f4;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #ccc;
+  margin: 20px 0;
+}
+`;
+
 const CreateBook = () => {
   const [activeTab, setActiveTab] = useState("info");
   const [bookTitle, setBookTitle] = useState("");
@@ -54,6 +141,9 @@ const CreateBook = () => {
   ]);
   
   const [activeChapterIndex, setActiveChapterIndex] = useState(0);
+  const [editorType, setEditorType] = useState<"basic" | "advanced">("basic");
+  
+  const editorRef = useRef<any>(null);
   
   // Handle file upload
   const handleCoverUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,6 +190,11 @@ const CreateBook = () => {
     // @ts-ignore - we know the type is correct
     newChapters[index][key] = value;
     setChapters(newChapters);
+  };
+
+  // Handle TinyMCE editor content change
+  const handleEditorChange = (content: string) => {
+    updateChapter(activeChapterIndex, "content", content);
   };
   
   // Save book
@@ -322,6 +417,32 @@ const CreateBook = () => {
         
         {/* Contents Tab */}
         <TabsContent value="contents" className="mt-6">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-bold">İçerik Düzenleyici</h2>
+            
+            <div className="flex items-center space-x-2 bg-secondary rounded-lg p-1">
+              <Button 
+                variant={editorType === "basic" ? "default" : "ghost"} 
+                size="sm" 
+                onClick={() => setEditorType("basic")}
+                className="flex items-center"
+              >
+                <FileText className="mr-2 h-4 w-4" />
+                Temel Editör
+              </Button>
+              
+              <Button 
+                variant={editorType === "advanced" ? "default" : "ghost"}
+                size="sm"
+                onClick={() => setEditorType("advanced")}
+                className="flex items-center"
+              >
+                <PenTool className="mr-2 h-4 w-4" />
+                Gelişmiş Editör
+              </Button>
+            </div>
+          </div>
+        
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="md:col-span-1">
               <CardHeader>
@@ -399,13 +520,40 @@ const CreateBook = () => {
                 
                 <div className="space-y-2">
                   <Label htmlFor="chapter-content">Bölüm İçeriği</Label>
-                  <Textarea
-                    id="chapter-content"
-                    placeholder="Bölümün içeriğini yazın..."
-                    rows={12}
-                    value={chapters[activeChapterIndex]?.content || ""}
-                    onChange={(e) => updateChapter(activeChapterIndex, "content", e.target.value)}
-                  />
+                  
+                  {editorType === "basic" ? (
+                    <Textarea
+                      id="chapter-content"
+                      placeholder="Bölümün içeriğini yazın..."
+                      rows={12}
+                      value={chapters[activeChapterIndex]?.content || ""}
+                      onChange={(e) => updateChapter(activeChapterIndex, "content", e.target.value)}
+                      className="min-h-[400px]"
+                    />
+                  ) : (
+                    <div className="border rounded-md">
+                      <Editor
+                        apiKey="a2roirrlanjxgq6h0j7vuvt73u2hq7t5n55dr423lolj79pf"
+                        onInit={(evt, editor) => editorRef.current = editor}
+                        initialValue={chapters[activeChapterIndex]?.content || ""}
+                        init={{
+                          height: 400,
+                          menubar: true,
+                          plugins: [
+                            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview', 'anchor',
+                            'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                            'insertdatetime', 'media', 'table', 'help', 'wordcount'
+                          ],
+                          toolbar: 'undo redo | formatselect | ' +
+                            'bold italic backcolor | alignleft aligncenter ' +
+                            'alignright alignjustify | bullist numlist outdent indent | ' +
+                            'removeformat | help',
+                          content_style: CONTENT_CSS
+                        }}
+                        onEditorChange={handleEditorChange}
+                      />
+                    </div>
+                  )}
                 </div>
                 
                 <div className="flex items-center space-x-2">

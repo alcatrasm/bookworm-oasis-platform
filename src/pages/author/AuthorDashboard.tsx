@@ -149,33 +149,17 @@ const AuthorDashboard = () => {
       {/* Create New Book Section */}
       <div className="mb-8">
         <h2 className="text-xl font-bold mb-4">Yeni E-Kitap Oluştur</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
           <Card className="bg-gradient-to-br from-primary/10 to-secondary/10">
             <CardContent className="p-6">
               <div className="text-center py-6">
                 <BookText className="h-12 w-12 mx-auto mb-4 text-primary" />
-                <h3 className="text-xl font-bold mb-2">Standart E-Kitap</h3>
-                <p className="text-muted-foreground mb-6">Basit formatlı kitaplar için geleneksel metin editörü</p>
+                <h3 className="text-xl font-bold mb-2">Yeni E-Kitap</h3>
+                <p className="text-muted-foreground mb-6">Temel ve gelişmiş düzenleme seçenekleriyle kitabınızı oluşturun</p>
                 <Link to="/author/create">
                   <Button className="w-full">
                     <FileText className="mr-2 h-4 w-4" />
                     Yeni Kitap Oluştur
-                  </Button>
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-gradient-to-br from-primary/40 to-secondary/20 border-primary/40">
-            <CardContent className="p-6">
-              <div className="text-center py-6">
-                <PenTool className="h-12 w-12 mx-auto mb-4 text-primary" />
-                <h3 className="text-xl font-bold mb-2">TinyMCE ile Gelişmiş E-Kitap</h3>
-                <p className="text-muted-foreground mb-6">Zengin içerikli, interaktif ve gelişmiş e-kitaplar için</p>
-                <Link to="/author/ebook/new">
-                  <Button variant="default" className="w-full">
-                    <Edit className="mr-2 h-4 w-4" />
-                    TinyMCE ile Oluştur
                   </Button>
                 </Link>
               </div>

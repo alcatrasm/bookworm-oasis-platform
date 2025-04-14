@@ -27,7 +27,6 @@ import EbookReader from "./pages/reader/EbookReader";
 // Author Pages
 import AuthorDashboard from "./pages/author/AuthorDashboard";
 import CreateBook from "./pages/author/CreateBook";
-import EbookEditor from "./pages/author/EbookEditor";
 
 // Admin Pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -86,8 +85,10 @@ const App = () => (
             <Route path="create" element={<CreateBook />} />
             <Route path="" element={<Navigate to="/author/dashboard" replace />} />
           </Route>
-          <Route path="/author/ebook/:id" element={<EbookEditor />} />
-          <Route path="/author/ebook/new" element={<EbookEditor />} />
+          
+          {/* Redirect old ebook editor routes to CreateBook */}
+          <Route path="/author/ebook/:id" element={<Navigate to="/author/create" replace />} />
+          <Route path="/author/ebook/new" element={<Navigate to="/author/create" replace />} />
           
           {/* Admin Routes */}
           <Route 
