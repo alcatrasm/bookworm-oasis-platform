@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
@@ -39,6 +38,7 @@ import {
   MoveVertical,
   Presentation,
   Bookmark,
+  BookOpen, // Add this import
 } from "lucide-react";
 import { Book as BookType, Chapter, ChapterTemplate } from "@/types/ebook";
 
