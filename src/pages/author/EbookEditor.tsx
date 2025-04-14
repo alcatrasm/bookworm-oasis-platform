@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
@@ -49,7 +50,7 @@ import {
   Heading3,
   Image,
   ListOrdered,
-  ListUnordered,
+  // ListUnordered was causing an error, removing it
   Loader2,
   Plus,
   Save,
@@ -290,7 +291,7 @@ const EbookEditor = () => {
   const [bookTitle, setBookTitle] = useState(book.title);
   const [bookDescription, setBookDescription] = useState(book.description);
   const [bookCoverImageUrl, setBookCoverImageUrl] = useState(book.coverImageUrl);
-  const editorRef = useRef<Editor | null>(null);
+  const editorRef = useRef<any>(null);
 
   useEffect(() => {
     if (!isNewBook) {
@@ -313,7 +314,7 @@ const EbookEditor = () => {
 
   const log = () => {
     if (editorRef.current) {
-      console.log(editorRef.current.getContent());
+      console.log(editorRef.current.editor.getContent());
     }
   };
 
@@ -508,13 +509,13 @@ const EbookEditor = () => {
                       </AccordionTrigger>
                       <AccordionContent>
                         <div className="flex items-center justify-between">
-                          <Button variant="ghost" size="xs" onClick={() => moveChapterUp(chapter.id)}>
+                          <Button variant="ghost" size="sm" onClick={() => moveChapterUp(chapter.id)}>
                             Yukarı Taşı
                           </Button>
-                          <Button variant="ghost" size="xs" onClick={() => moveChapterDown(chapter.id)}>
+                          <Button variant="ghost" size="sm" onClick={() => moveChapterDown(chapter.id)}>
                             Aşağı Taşı
                           </Button>
-                          <Button variant="destructive" size="xs" onClick={() => deleteChapter(chapter.id)}>
+                          <Button variant="destructive" size="sm" onClick={() => deleteChapter(chapter.id)}>
                             Sil
                           </Button>
                         </div>

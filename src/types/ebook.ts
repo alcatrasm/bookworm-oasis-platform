@@ -4,25 +4,27 @@ export interface Chapter {
   title: string;
   content: string;
   order: number;
+  wordCount: number;
+  estimatedReadTime: number;
+  createdAt: string;
+  updatedAt: string;
   parentId?: string | null;
 }
 
 export interface Book {
   id: string;
   title: string;
-  author: string;
-  cover?: string;
-  description?: string;
-  chapters: Chapter[];
+  description: string;
+  coverImageUrl: string;
+  authorId: string;
+  categoryId: string;
   createdAt: string;
   updatedAt: string;
-  published: boolean;
+  chapters: Chapter[];
 }
 
-export type ChapterType = 'introduction' | 'chapter' | 'appendix' | 'bibliography';
-
 export interface ChapterTemplate {
-  name: string;
-  type: ChapterType;
+  id: string;
+  title: string;
   content: string;
 }
