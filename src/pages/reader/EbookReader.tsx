@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -37,15 +36,22 @@ import { Book, Chapter } from "@/types/ebook";
 const mockBook: Book = {
   id: "sample-book-1",
   title: "Dijital Çağda Pazarlama Stratejileri",
-  author: "Serkan Yılmaz",
   description: "Modern pazarlama dünyasında başarılı olmanın yolları",
-  cover: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
+  coverImageUrl: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
+  authorId: "author-123",
+  categoryId: "marketing-101",
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
   chapters: [
     {
       id: "ch1",
       title: "Giriş",
       content: "<h1>Giriş</h1><p>Bu kitap, dijital pazarlama stratejileri hakkında kapsamlı bir rehber sunmaktadır. İnternet kullanımının yaygınlaşması ve dijital teknolojilerin gelişmesiyle birlikte, pazarlama alanında da büyük değişimler yaşanmıştır. Geleneksel pazarlama yöntemlerinin yerini dijital kanallar almaya başlamış, işletmeler hedef kitlelerine ulaşmak için yeni stratejiler geliştirmek zorunda kalmıştır.</p><p>Bu kitapta, dijital pazarlamanın temel kavramlarından başlayarak, sosyal medya stratejileri, içerik pazarlaması, SEO, e-posta pazarlaması ve analitik gibi konulara detaylı bir şekilde değineceğiz. Amacımız, işletmelerin dijital dünyada nasıl daha etkili olabileceklerini ve rekabet avantajı sağlayabileceklerini anlamalarına yardımcı olmaktır.</p><blockquote><p>\"Dijital pazarlama, sadece teknoloji kullanımı değil, aynı zamanda insan odaklı bir yaklaşımla müşteri deneyimini merkeze alan bir düşünce biçimidir.\"</p></blockquote><p>Kitabın her bölümünde teorik bilgilerin yanı sıra pratik öneriler, vaka çalışmaları ve başarı hikayeleri de bulacaksınız. Bu sayede öğrendiklerinizi hemen uygulamaya geçirebilir ve sonuçlarını görebilirsiniz.</p><p>Dijital pazarlama dünyasına hoş geldiniz!</p>",
       order: 0,
+      wordCount: 180,
+      estimatedReadTime: 3,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
       parentId: null,
     },
     {
@@ -53,6 +59,10 @@ const mockBook: Book = {
       title: "Dijital Pazarlamanın Temelleri",
       content: "<h1>Dijital Pazarlamanın Temelleri</h1><p>Dijital pazarlama, bir ürün veya hizmetin elektronik cihazlar veya internet kullanılarak tanıtılması, pazarlanması ve satılması anlamına gelir. Geleneksel pazarlamadan farklı olarak, dijital pazarlama daha düşük maliyetlerle daha geniş kitlelere ulaşabilme avantajı sunar.</p><h2>Dijital Pazarlamanın Avantajları</h2><ul><li>Daha düşük maliyet</li><li>Geniş kitleye erişim</li><li>Hedefleme imkanı</li><li>Ölçülebilirlik</li><li>Gerçek zamanlı sonuçlar</li><li>Kolay optimizasyon</li></ul><p>Dijital pazarlama, işletmelerin hedef kitlelerine daha etkili bir şekilde ulaşmalarını sağlar. Özellikle küçük işletmeler için büyük avantajlar sunar, çünkü geleneksel pazarlama kanallarına kıyasla daha düşük bütçelerle daha iyi sonuçlar elde edilebilir.</p><div class=\"info-box\"><p><strong>Bilgi:</strong> Dijital pazarlama, 2023 yılı itibariyle global pazarlama harcamalarının %60'ından fazlasını oluşturmaktadır.</p></div><h2>Dijital Pazarlama Kanalları</h2><p>Dijital pazarlama stratejinizi oluştururken kullanabileceğiniz birçok kanal bulunmaktadır:</p><ol><li>Web sitesi ve blog</li><li>Sosyal medya (Facebook, Instagram, Twitter, LinkedIn, vb.)</li><li>E-posta pazarlaması</li><li>Arama motoru optimizasyonu (SEO)</li><li>İçerik pazarlaması</li><li>Video pazarlaması</li><li>Ücretli reklamlar (PPC, display ads)</li><li>Influencer pazarlaması</li></ol><p>Her işletme için ideal dijital pazarlama karması farklı olabilir. Hedef kitlenizin hangi kanalları kullandığını anlamak ve buna göre stratejinizi şekillendirmek önemlidir.</p><figure><img src=\"https://images.unsplash.com/photo-1557838923-2985c318be48\" alt=\"Dijital Pazarlama İstatistikleri\" width=\"100%\"/><figcaption>Dijital Pazarlama Kanalları ve Kullanım Oranları</figcaption></figure><p>Bir sonraki bölümde, etkili bir sosyal medya stratejisi geliştirmenin temel adımlarını ele alacağız.</p>",
       order: 1,
+      wordCount: 250,
+      estimatedReadTime: 5,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
       parentId: null,
     },
     {
@@ -60,12 +70,13 @@ const mockBook: Book = {
       title: "Sosyal Medya Stratejileri",
       content: "<h1>Sosyal Medya Stratejileri</h1><p>Sosyal medya platformları, işletmelerin hedef kitlelerine ulaşması için güçlü kanallar sunar. Ancak her platformun kendine özgü dinamikleri ve kullanıcı davranışları vardır. Bu bölümde, etkili bir sosyal medya stratejisi geliştirmenin temel adımlarını ele alacağız.</p><h2>Sosyal Medya Platformlarını Tanıma</h2><p>Her sosyal medya platformu farklı amaçlara hizmet eder ve farklı kullanıcı demografilerine sahiptir:</p><table><thead><tr><th>Platform</th><th>Hedef Kitle</th><th>İçerik Türü</th><th>Özellikler</th></tr></thead><tbody><tr><td>Facebook</td><td>Geniş yaş aralığı</td><td>Metin, görsel, video</td><td>Topluluk oluşturma, etkinlikler</td></tr><tr><td>Instagram</td><td>Genç-orta yaş</td><td>Görsel, kısa video</td><td>Yüksek etkileşim, hikayeler</td></tr><tr><td>Twitter</td><td>Haber odaklı</td><td>Kısa metin, linkler</td><td>Gerçek zamanlı, hashtag</td></tr><tr><td>LinkedIn</td><td>Profesyoneller</td><td>İş odaklı içerik</td><td>B2B iletişim, kariyer</td></tr><tr><td>TikTok</td><td>Z kuşağı</td><td>Kısa video</td><td>Viral içerik, trendler</td></tr></tbody></table><h2>Etkili Sosyal Medya Stratejisi Adımları</h2><ol><li><strong>Hedeflerinizi belirleyin:</strong> Marka bilinirliği, trafik, satış, müşteri sadakati?</li><li><strong>Hedef kitlenizi tanımlayın:</strong> Demografik özellikler, ilgi alanları, davranışlar</li><li><strong>Doğru platformları seçin:</strong> Hedef kitlenizin aktif olduğu platformlara odaklanın</li><li><strong>İçerik stratejisi oluşturun:</strong> İçerik türleri, paylaşım sıklığı, ton ve dil</li><li><strong>İçerik takvimi hazırlayın:</strong> Tutarlı ve düzenli paylaşımlar için</li><li><strong>Topluluk yönetimi yapın:</strong> Yorumlara cevap verin, etkileşimi artırın</li><li><strong>Analiz ve optimizasyon:</strong> Performansı ölçün ve stratejinizi geliştirin</li></ol><div class=\"warning-box\"><p><strong>Dikkat:</strong> Tüm platformlarda var olmaya çalışmak yerine, hedef kitlenizin en aktif olduğu 2-3 platformda etkili olmaya odaklanın.</p></div><h2>İçerik Oluşturma İpuçları</h2><p>Etkili sosyal medya içerikleri oluşturmak için bazı temel prensipler:</p><ul><li>Hedef kitlenize değer sunun</li><li>Görsel açıdan çekici içerikler hazırlayın</li><li>Hikaye anlatımı tekniklerini kullanın</li><li>İnteraktif içerikler oluşturun (anketler, sorular)</li><li>Güncel trendleri takip edin ve uyarlayın</li><li>Özgün ve otantik olun</li><li>Call-to-action (CTA) kullanın</li></ul><p>Sosyal medya stratejinizi düzenli olarak gözden geçirin ve platform algoritmalarındaki değişikliklere göre adapte edin. Başarılı bir sosyal medya varlığı oluşturmak zaman ve sürekli çaba gerektirir.</p><p>Bir sonraki bölümde, içerik pazarlaması ve SEO stratejilerini detaylı olarak inceleyeceğiz.</p>",
       order: 2,
+      wordCount: 320,
+      estimatedReadTime: 6,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
       parentId: null,
     },
   ],
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
-  published: true,
 };
 
 // Font size options
