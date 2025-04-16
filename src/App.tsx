@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -21,6 +20,11 @@ import Register from "./pages/auth/Register";
 // Reader Pages
 import ReaderDashboard from "./pages/reader/ReaderDashboard";
 import ReaderPurchases from "./pages/reader/ReaderPurchases";
+import ReaderHistory from "./pages/reader/ReaderHistory";
+import ReaderReviews from "./pages/reader/ReaderReviews";
+import ReaderFavorites from "./pages/reader/ReaderFavorites";
+import ReaderProfile from "./pages/reader/ReaderProfile";
+import ReaderSettings from "./pages/reader/ReaderSettings";
 import BookReader from "./pages/reader/BookReader";
 import EbookReader from "./pages/reader/EbookReader";
 
@@ -69,6 +73,11 @@ const App = () => (
           >
             <Route path="dashboard" element={<ReaderDashboard />} />
             <Route path="purchases" element={<ReaderPurchases />} />
+            <Route path="history" element={<ReaderHistory />} />
+            <Route path="reviews" element={<ReaderReviews />} />
+            <Route path="favorites" element={<ReaderFavorites />} />
+            <Route path="profile" element={<ReaderProfile />} />
+            <Route path="settings" element={<ReaderSettings />} />
             <Route path="" element={<Navigate to="/reader/dashboard" replace />} />
           </Route>
           <Route path="/reader/book/:id" element={<BookReader />} />
