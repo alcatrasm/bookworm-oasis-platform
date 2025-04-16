@@ -2,14 +2,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import {
-  ShieldCheck,
+  LayoutDashboard,
   BookOpen,
   MessageSquare,
   Users,
-  Feather,
   Tag,
   BarChart2,
-  Bell,
   Settings
 } from "lucide-react";
 
@@ -26,8 +24,8 @@ export const AdminSidebarLinks = () => {
         to="/admin/dashboard" 
         className={cn("sidebar-link", isActive("/admin/dashboard") && "active")}
       >
-        <ShieldCheck className="h-5 w-5" />
-        <span>Admin Paneli</span>
+        <LayoutDashboard className="h-5 w-5" />
+        <span>Genel Bakış</span>
       </Link>
       <Link 
         to="/admin/books" 
@@ -51,13 +49,6 @@ export const AdminSidebarLinks = () => {
         <span>Kullanıcılar</span>
       </Link>
       <Link 
-        to="/admin/authors" 
-        className={cn("sidebar-link", isActive("/admin/authors") && "active")}
-      >
-        <Feather className="h-5 w-5" />
-        <span>Yazarlar</span>
-      </Link>
-      <Link 
         to="/admin/categories" 
         className={cn("sidebar-link", isActive("/admin/categories") && "active")}
       >
@@ -70,13 +61,6 @@ export const AdminSidebarLinks = () => {
       >
         <BarChart2 className="h-5 w-5" />
         <span>Analizler</span>
-      </Link>
-      <Link 
-        to="/admin/notifications" 
-        className={cn("sidebar-link", isActive("/admin/notifications") && "active")}
-      >
-        <Bell className="h-5 w-5" />
-        <span>Bildirimler</span>
       </Link>
       <Link 
         to="/admin/settings" 

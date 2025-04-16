@@ -34,7 +34,10 @@ import CreateBook from "./pages/author/CreateBook";
 
 // Admin Pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminBooks from "./pages/admin/AdminBooks";
 import BookApproval from "./pages/admin/BookApproval";
+import AdminReviews from "./pages/admin/AdminReviews";
+import AdminUsers from "./pages/admin/AdminUsers";
 
 // Book Pages
 import BookDetail from "./pages/books/BookDetail";
@@ -105,7 +108,10 @@ const App = () => (
             element={<DashboardLayout role="admin" />}
           >
             <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="books" element={<AdminBooks />} />
             <Route path="books/:id" element={<BookApproval />} />
+            <Route path="reviews" element={<AdminReviews />} />
+            <Route path="users" element={<AdminUsers />} />
             <Route path="" element={<Navigate to="/admin/dashboard" replace />} />
           </Route>
           
