@@ -38,6 +38,9 @@ import AdminBooks from "./pages/admin/AdminBooks";
 import BookApproval from "./pages/admin/BookApproval";
 import AdminReviews from "./pages/admin/AdminReviews";
 import AdminUsers from "./pages/admin/AdminUsers";
+import AdminCategories from "./pages/admin/AdminCategories";
+import AdminAnalytics from "./pages/admin/AdminAnalytics";
+import AdminSettings from "./pages/admin/AdminSettings";
 
 // Book Pages
 import BookDetail from "./pages/books/BookDetail";
@@ -112,6 +115,9 @@ const App = () => (
             <Route path="books/:id" element={<BookApproval />} />
             <Route path="reviews" element={<AdminReviews />} />
             <Route path="users" element={<AdminUsers />} />
+            <Route path="categories" element={<AdminCategories />} />
+            <Route path="analytics" element={<AdminAnalytics />} />
+            <Route path="settings" element={<AdminSettings />} />
             <Route path="" element={<Navigate to="/admin/dashboard" replace />} />
           </Route>
           
